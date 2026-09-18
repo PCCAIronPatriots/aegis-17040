@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
 
 //
 // build.gradle in TeamCode
@@ -20,6 +22,9 @@ android {
     namespace = 'org.firstinspires.ftc.teamcode'
 
     packagingOptions {
+        jniLibs {
+            pickFirsts += ['**/*.so']
+        }
         jniLibs.useLegacyPackaging true
     }
 }
