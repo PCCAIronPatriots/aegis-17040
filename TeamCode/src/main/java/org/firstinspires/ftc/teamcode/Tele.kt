@@ -6,18 +6,19 @@ import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.HardwareMap
 
 @TeleOp
- class Tele : OpMode() {
+class Tele : OpMode() {
     override fun init() {
-      var drive =  Drivetrain()
+        var drive = SwerveDrive()
         drive.init(hardwareMap)
         drive.telem(telemetry)
 
     }
     override fun loop() {
-        var drive = Drivetrain()
+        var drive = SwerveDrive()
         drive.init(hardwareMap)
         drive.telem(telemetry)
-        drive.run(gamepad1, mecanum = false)
+        telemetry.update()
+        drive.run(gamepad1)
 
     }
 }
