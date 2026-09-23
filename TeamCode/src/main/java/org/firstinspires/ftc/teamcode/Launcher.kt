@@ -38,4 +38,12 @@ class Launcher {
         }
         launcher.setVelocity((rTrig - lTrig) * curSelecLaunchVelo.toDouble());
     }
+
+    fun telem(telemetry: Telemetry) {
+        telemetry.addData("LauncherPower: ", launcher.getPower());
+        telemetry.addData("LauncherRPM: ", launcherRPM);
+        telemetry.addData("LauncherVelocityMode: ", speedSetting);
+        telemetry.addData("LauncherTargetVelocity: ", curSelecLaunchVelo);
+    }
+    }
 }

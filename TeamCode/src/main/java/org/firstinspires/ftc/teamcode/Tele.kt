@@ -8,13 +8,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 @TeleOp
 class Tele : OpMode() {
     override fun init() {
-        var drive = SwerveDrive()
+        var drive = ArcadeDrive()
+        var launch = Launcher()
+        var intake = Intake()
+
         drive.init(hardwareMap)
         drive.telem(telemetry)
 
     }
     override fun loop() {
-        var drive = SwerveDrive()
+        var drive = ArcadeDrive()
+        var launch = Launcher()
+        var intake = Intake()
         drive.init(hardwareMap)
         drive.telem(telemetry)
         telemetry.update()
