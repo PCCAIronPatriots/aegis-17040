@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 
 
 
-class SwerveDrive  {
+class ArcadeDrive  {
     private lateinit var left: DcMotor
     private lateinit var right: DcMotor
 
