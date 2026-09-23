@@ -28,8 +28,8 @@ class ArcadeDrive  {
         val yAxis = -gamepad1.left_stick_y
         val xAxis = gamepad1.right_stick_x
 
-        left.setPower((yAxis + xAxis).toDouble())
-        right.setPower((yAxis - xAxis).toDouble())
+        left.setPower(((yAxis + xAxis).toDouble()) * Constants.chassisSpeed)
+        right.setPower(((yAxis - xAxis).toDouble())  * Constants.chassisSpeed)
     }
 
     fun telem(telemetry: Telemetry) {
