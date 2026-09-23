@@ -13,17 +13,31 @@ class Tele : OpMode() {
         var intake = Intake()
 
         drive.init(hardwareMap)
+        launch.init(hardwareMap)
+        intake.init(hardwareMap)
+
         drive.telem(telemetry)
+        launch.telem(telemetry)
+        intake.telem(telemetry)
+        telemetry.update()
 
     }
     override fun loop() {
         var drive = ArcadeDrive()
         var launch = Launcher()
         var intake = Intake()
+
         drive.init(hardwareMap)
-        drive.telem(telemetry)
-        telemetry.update()
+        launch.init(hardwareMap)
+        intake.init(hardwareMap)
+
         drive.run(gamepad1)
+
+        drive.telem(telemetry)
+        intake.telem(telemetry)
+        launch.telem(telemetry)
+
+        telemetry.update()
 
     }
 }
