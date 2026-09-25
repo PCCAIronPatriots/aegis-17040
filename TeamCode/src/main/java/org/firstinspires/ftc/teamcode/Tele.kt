@@ -32,7 +32,7 @@ class Tele : OpMode() {
         intake.init(hardwareMap)
 
         drive.run(gamepad1)
-        launch.run(gamepad1)
+        launch.control(gamepad1)
         intake.run(gamepad1)
 
         drive.telem(telemetry)

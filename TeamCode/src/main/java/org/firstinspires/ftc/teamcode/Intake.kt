@@ -24,37 +24,27 @@ class Intake {
     }
 
     fun run(gamepad1: Gamepad) {
-
-        val rBump: Boolean = gamepad1.right_bumper
-        val lBump: Boolean = gamepad1.left_bumper
-
         fun intakePower(power: Double) {
-            intakeMotor.setPower(Constants.intakeMotor * power)
-            lIS.setPower(Constants.intakeLServo * power)
-            rIS.setPower(Constants.intakeRServo * power)
+            intakeMotor.power = (Constants.intakeMotor * power)
+            lIS.power = (Constants.intakeLServo * power)
+            rIS.power = (Constants.intakeRServo * power)
         }
-
         var intakePower: Double = 0.0
 
 
-        if (rBump && (intakePower == 0.0)) {
-            intakePower(1.0)
-        } else if (rBump && (intakePower == 1.0)) {
-            intakePower(0.0)
-            if (lBump && ((intakePower == 0.0)) || (intakePower == 1.0)) {
-                intakePower = -1.0
-            } else if (lBump && (intakePower == -1.0)) {
-                intakePower = 0.0
-            }
-
-            intakePower(intakePower)
-
-
+        if (gamepad1.left_bumper && !gamepad1.right_bumper) {
+            intakePower = -1.0
+        } else if (gamepad1.right_bumper && !gamepad1.left_bumper) {
+            intakePower = 1.0
+        } else {
+            intakePower = 0.0
         }
+            intakePower(intakePower)
+        }
+
 
         fun telem(telemetry: Telemetry) {
             telemetry.addData("IntakeRealPower:", intakeMotor.getPower())
-            telemetry.addData("IntakeSetPower: ", intakePower)
         }
     }
-}
+

@@ -12,30 +12,27 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 
 class Launcher {
     private lateinit var launcher: DcMotorEx
-    val launcherSpeeds = arrayOf(0, 280, 560, 840, 1120, 1400, 1680, 1960, 2240, 2520, 2800)
-    var speedSetting: Int = 0
-    var curSelecLaunchVelo: Int = launcherSpeeds[speedSetting]
+
 
     fun init(hardwaremap: HardwareMap) {
         launcher = hardwaremap.get(DcMotorEx::class.java, "launcher")
-        launcher.direction = DcMotorSimple.Direction.REVERSE
+        launcher.direction = DcMotorSimple.Direction.FORWARD
     }
 
-    fun run(gamepad1: Gamepad) {
-        val lTrig = gamepad1.left_trigger
-        val rTrig = gamepad1.right_trigger
-        val aButtonPressed = gamepad1.aWasPressed()
-        val bButtonPressed = gamepad1.bWasPressed()
+    fun setPowerInVelocity(power: Double) {
+        launcher.setVelocity(Constants.launcherTickPerRevolution * 100 * power)
+    }
 
-
-
-        if (aButtonPressed  /*speedSetting < launcherSpeeds.size - 1*/) {
-            speedSetting++
+    fun control(gamepad1: Gamepad) {
+        var power = 0.0
+        if (gamepad1.right_trigger > 0.15) {
+            power = 1.0
+        } else if (gamepad1.left_trigger > 0.15) {
+            power = -1.0
+        } else {
+            power = 0.0
         }
-        if (bButtonPressed && speedSetting > 0) {
-            speedSetting--
-        }
-        launcher.setVelocity((rTrig - lTrig) * curSelecLaunchVelo.toDouble());
+        setPowerInVelocity(power)
     }
 
     fun telem(telemetry: Telemetry) {
@@ -43,7 +40,5 @@ class Launcher {
 
         telemetry.addData("LauncherPower: ", launcher.getPower())
         telemetry.addData("LauncherRPM: ", launcherRPM)
-        telemetry.addData("LauncherVelocityMode: ", speedSetting)
-        telemetry.addData("LauncherTargetVelocity: ", curSelecLaunchVelo)
     }
     }
