@@ -15,7 +15,6 @@ class Launcher {
     val launcherSpeeds = arrayOf(0, 280, 560, 840, 1120, 1400, 1680, 1960, 2240, 2520, 2800)
     var speedSetting: Int = 0
     var curSelecLaunchVelo: Int = launcherSpeeds[speedSetting]
-    var launcherRPM: Double = (launcher.getVelocity() / 28 * 60)
 
     fun init(hardwaremap: HardwareMap) {
         launcher = hardwaremap.get(DcMotorEx::class.java, "launcher")
@@ -30,16 +29,18 @@ class Launcher {
 
 
 
-        if (aButtonPressed && speedSetting < launcherSpeeds.size - 1) {
-            speedSetting++;
+        if (aButtonPressed  /*speedSetting < launcherSpeeds.size - 1*/) {
+            speedSetting++
         }
         if (bButtonPressed && speedSetting > 0) {
-            speedSetting--;
+            speedSetting--
         }
         launcher.setVelocity((rTrig - lTrig) * curSelecLaunchVelo.toDouble());
     }
 
     fun telem(telemetry: Telemetry) {
+        var launcherRPM: Double = (launcher.getVelocity() / 28 * 60)
+
         telemetry.addData("LauncherPower: ", launcher.getPower())
         telemetry.addData("LauncherRPM: ", launcherRPM)
         telemetry.addData("LauncherVelocityMode: ", speedSetting)

@@ -16,26 +16,45 @@ class Intake {
     fun init(hardwareMap: HardwareMap) {
         intakeMotor = hardwareMap.get(DcMotor::class.java, "intakeMotor")
         lIS = hardwareMap.get(CRServo::class.java, "lIS")
-        rIS = hardwareMap.get(CRServo::class.java,"rIS")
+        rIS = hardwareMap.get(CRServo::class.java, "rIS")
 
-        intakeMotor.direction = DcMotorSimple.Direction.REVERSE
+        intakeMotor.direction = DcMotorSimple.Direction.FORWARD
         lIS.direction = DcMotorSimple.Direction.REVERSE
         rIS.direction = DcMotorSimple.Direction.FORWARD
     }
 
     fun run(gamepad1: Gamepad) {
-        val rBumper = gamepad1.right_bumper
 
-        if (rBumper) {
-            intakeMotor.setPower(Constants.intakeMotor)
-            lIS.setPower(Constants.intakeLServo)
-            rIS.setPower(Constants.intakeRServo)
+        val rBump: Boolean = gamepad1.right_bumper
+        val lBump: Boolean = gamepad1.left_bumper
+
+        fun intakePower(power: Double) {
+            intakeMotor.setPower(Constants.intakeMotor * power)
+            lIS.setPower(Constants.intakeLServo * power)
+            rIS.setPower(Constants.intakeRServo * power)
         }
-    }
 
-    fun telem(telemetry: Telemetry) {
-        telemetry.addData("IntakeMotorPower:" , intakeMotor.getPower() )
+        var intakePower: Double = 0.0
 
 
+        if (rBump && (intakePower == 0.0)) {
+            intakePower(1.0)
+        } else if (rBump && (intakePower == 1.0)) {
+            intakePower(0.0)
+            if (lBump && ((intakePower == 0.0)) || (intakePower == 1.0)) {
+                intakePower = -1.0
+            } else if (lBump && (intakePower == -1.0)) {
+                intakePower = 0.0
+            }
+
+            intakePower(intakePower)
+
+
+        }
+
+        fun telem(telemetry: Telemetry) {
+            telemetry.addData("IntakeRealPower:", intakeMotor.getPower())
+            telemetry.addData("IntakeSetPower: ", intakePower)
+        }
     }
 }

@@ -19,7 +19,7 @@ class ArcadeDrive  {
         left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE)
         right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE)
 
-        left.direction = DcMotorSimple.Direction.REVERSE
+        left.direction = DcMotorSimple.Direction.FORWARD
         right.direction = DcMotorSimple.Direction.REVERSE
     }
 
