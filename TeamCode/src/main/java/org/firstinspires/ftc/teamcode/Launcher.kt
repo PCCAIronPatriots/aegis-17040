@@ -40,10 +40,9 @@ class Launcher {
     }
 
     fun telem(telemetry: Telemetry) {
-        telemetry.addData("LauncherPower: ", launcher.getPower());
-        telemetry.addData("LauncherRPM: ", launcherRPM);
-        telemetry.addData("LauncherVelocityMode: ", speedSetting);
-        telemetry.addData("LauncherTargetVelocity: ", curSelecLaunchVelo);
+        telemetry.addData("LauncherPower: ", launcher.getPower())
+        telemetry.addData("LauncherRPM: ", launcherRPM)
+        telemetry.addData("LauncherVelocityMode: ", speedSetting)
+        telemetry.addData("LauncherTargetVelocity: ", curSelecLaunchVelo)
     }
     }
-}
