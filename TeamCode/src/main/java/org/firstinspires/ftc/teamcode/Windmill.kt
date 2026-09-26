@@ -13,7 +13,7 @@ class Windmill {
 
     fun init(hardwaremap: HardwareMap) {
         windmill = hardwaremap.get(CRServo::class.java, "windmill")
-        windmill.direction = DcMotorSimple.Direction.REVERSE
+        windmill.direction = DcMotorSimple.Direction.FORWARD
 
     }
     fun control(gamepad1: Gamepad) {
@@ -25,6 +25,10 @@ class Windmill {
         } else {
             windmill.power = 0.0
         }
+    }
+
+    fun run(power: Double) {
+        windmill.power = power
     }
 
     fun telem(telemetry: Telemetry) {

@@ -11,14 +11,17 @@ class Tele : OpMode() {
         var drive = ArcadeDrive()
         var launch = Launcher()
         var intake = Intake()
+        var windmill = Windmill()
 
         drive.init(hardwareMap)
         launch.init(hardwareMap)
         intake.init(hardwareMap)
+        windmill.init(hardwareMap)
 
         drive.telem(telemetry)
         launch.telem(telemetry)
         intake.telem(telemetry)
+        windmill.telem(telemetry)
         telemetry.update()
 
     }
@@ -26,19 +29,22 @@ class Tele : OpMode() {
         var drive = ArcadeDrive()
         var launch = Launcher()
         var intake = Intake()
+        var windmill = Windmill()
 
         drive.init(hardwareMap)
         launch.init(hardwareMap)
         intake.init(hardwareMap)
+        windmill.init(hardwareMap)
 
         drive.run(gamepad1)
         launch.control(gamepad1)
         intake.run(gamepad1)
+        windmill.control(gamepad1)
 
         drive.telem(telemetry)
         intake.telem(telemetry)
         launch.telem(telemetry)
-
+        windmill.telem(telemetry)
         telemetry.update()
 
     }
