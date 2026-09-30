@@ -27,8 +27,9 @@ class Launcher {
         launcher.setVelocity(Constants.launcherTickPerRevolution * 100 * power * Constants.launcherSetSpeed)
     }
 
-    fun control(gamepad1: Gamepad) {
+    fun control(gamepad1: Gamepad, hardwaremap: HardwareMap) {
         var windmill = Windmill()
+        windmill.init(hardwaremap)
         var power = 0.0
         if (gamepad1.right_trigger  > 0.15 && gamepad1.left_trigger < 0.15) {
             power = 1.0

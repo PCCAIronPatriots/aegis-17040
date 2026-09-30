@@ -36,10 +36,10 @@ class MecanumDrive {
         val rStickX: Float = gamepad1.right_stick_x
 
         if (mecanum == true) {
-            fl.setPower((-lStickY + lStickX + rStickX).toDouble()); // -1.0 - 1.0 power level (sent from Joysticks)
-            rl.setPower((-lStickY - lStickX + rStickX).toDouble());
-            fr.setPower((-lStickY - lStickX - rStickX).toDouble());
-            rr.setPower((-lStickY + lStickX - rStickX).toDouble());
+            fl.setPower((-lStickY + lStickX + rStickX).toDouble()) // -1.0 - 1.0 power level (sent from Joysticks)
+            rl.setPower((-lStickY - lStickX + rStickX).toDouble())
+            fr.setPower((-lStickY - lStickX - rStickX).toDouble())
+            rr.setPower((-lStickY + lStickX - rStickX).toDouble())
         } else run {
             val yAxis = -gamepad1.left_stick_y
             val xAxis = gamepad1.right_stick_x
