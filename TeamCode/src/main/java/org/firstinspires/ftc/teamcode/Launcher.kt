@@ -11,9 +11,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 
 class Launcher {
     private lateinit var launcher: DcMotorEx
+    var windmill = Windmill()
 
 
     fun init(hardwaremap: HardwareMap) {
+        windmill.init(hardwaremap)
         launcher = hardwaremap.get(DcMotorEx::class.java, "launcher")
         launcher.direction = DcMotorSimple.Direction.FORWARD
         launcher.setPIDFCoefficients(
@@ -27,9 +29,7 @@ class Launcher {
         launcher.setVelocity(Constants.launcherTickPerRevolution * 100 * power * Constants.launcherSetSpeed)
     }
 
-    fun control(gamepad1: Gamepad, hardwaremap: HardwareMap) {
-        var windmill = Windmill()
-        windmill.init(hardwaremap)
+    fun control(gamepad1: Gamepad, ) {
         var power = 0.0
         if (gamepad1.right_trigger  > 0.15 && gamepad1.left_trigger < 0.15) {
             power = 1.0
