@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.HardwareMap
 
-@TeleOp
+@TeleOp(name = "TeleOp", group = "OpMode")
 class Tele : OpMode() {
     var drive = ArcadeDrive()
     var launch = Launcher()
