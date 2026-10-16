@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.PIDFCoefficients
 import org.firstinspires.ftc.robotcore.external.Telemetry
+import org.firstinspires.ftc.teamcode.Constants.launcherSetVelocity
 
 
 class Launcher {
@@ -29,22 +30,21 @@ class Launcher {
         launcher.setVelocity(Constants.launcherTickPerRevolution * 100 * power * Constants.launcherSetSpeed)
     }
 
-    fun control(gamepad1: Gamepad, ) {
+     fun control(gamepad1: Gamepad, ) {
+        val windmillThreshold = launcherSetVelocity - (launcherSetVelocity * (Constants.windmillThresholdValue / 100 ))
         var power = 0.0
-        if (gamepad1.right_trigger  > 0.15 && gamepad1.left_trigger < 0.15) {
+        if (gamepad1.right_trigger > 0.15 && gamepad1.left_trigger < 0.15) {
             power = 1.0
-            while (launcher.getVelocity() >= Constants.windmillThreshold) {
+            if (launcher.getVelocity() >= windmillThreshold) {
                 windmill.run(1.0)
-            }
-            while (launcher.getVelocity() < Constants.windmillThreshold) {
+            } else {
                 windmill.run(0.0)
             }
         } else if (gamepad1.left_trigger > 0.15 && gamepad1.right_trigger < 0.15) {
             power = -1.0
-            while (launcher.getVelocity() <= -Constants.windmillThreshold) {
+            if (launcher.getVelocity() <= -windmillThreshold) {
                 windmill.run(-1.0)
-            }
-            while (launcher.getVelocity() > -Constants.windmillThreshold) {
+            } else {
                 windmill.run(0.0)
             }
         } else {
