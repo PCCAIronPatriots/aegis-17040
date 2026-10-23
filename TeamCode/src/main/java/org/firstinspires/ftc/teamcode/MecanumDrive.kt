@@ -31,7 +31,7 @@ class MecanumDrive {
 
     fun  run(gamepad1 : Gamepad) {
         val lStickY: Float = gamepad1.left_stick_y
-        val lStickX: Float = -gamepad1.left_stick_x
+        val lStickX: Float = gamepad1.left_stick_x
         val rStickX: Float = gamepad1.right_stick_x
 
         fl.setPower((-lStickY + lStickX + rStickX).toDouble() * Constants.chassisSpeed) // -1.0 - 1.0 power level (sent from Joysticks)
