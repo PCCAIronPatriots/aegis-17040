@@ -13,26 +13,26 @@ class Tele : OpMode() {
 
     override fun init() {
         drive.init(hardwareMap)
-       /* launch.init(hardwareMap)
-        intake.init(hardwareMap)*/
+       launch.init(hardwareMap)
+        intake.init(hardwareMap)
 
         drive.telem(telemetry)
-        /*launch.telem(telemetry)
-        intake.telem(telemetry)*/
+        launch.telem(telemetry)
+        intake.telem(telemetry)
         telemetry.update()
 
     }
     override fun loop() {
-//        drive.init(hardwareMap)
-//        launch.init(hardwareMap)
-//        intake.init(hardwareMap)
+        drive.init(hardwareMap)
+        launch.init(hardwareMap)
+        intake.init(hardwareMap)
         drive.run(gamepad1)
-       /* launch.control(gamepad1)
-        intake.run(gamepad1) */
+        launch.control(gamepad1)
+        intake.run(gamepad1)
 
         drive.telem(telemetry)
-       /* intake.telem(telemetry)
-        launch.telem(telemetry) */
+        intake.telem(telemetry)
+        launch.telem(telemetry)
         telemetry.update()
 
     }
