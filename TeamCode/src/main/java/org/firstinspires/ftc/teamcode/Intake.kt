@@ -15,19 +15,19 @@ class Intake {
 
     fun init(hardwareMap: HardwareMap) {
         intakeMotor = hardwareMap.get(DcMotor::class.java, "intakeMotor")
-        /*lIS = hardwareMap.get(CRServo::class.java, "lIS")
-        rIS = hardwareMap.get(CRServo::class.java, "rIS") */
+        lIS = hardwareMap.get(CRServo::class.java, "lIS")
+        rIS = hardwareMap.get(CRServo::class.java, "rIS")
 
         intakeMotor.direction = DcMotorSimple.Direction.FORWARD
-        /* lIS.direction = DcMotorSimple.Direction.REVERSE
-        rIS.direction = DcMotorSimple.Direction.FORWARD */
+        lIS.direction = DcMotorSimple.Direction.REVERSE
+        rIS.direction = DcMotorSimple.Direction.FORWARD
     }
 
     fun run(gamepad1: Gamepad) {
         fun intakePower(power: Double) {
             intakeMotor.power = (Constants.intakeMotor * power)
-            /* lIS.power = (Constants.intakeLServo * power)
-            rIS.power = (Constants.intakeRServo * power) */
+            lIS.power = (Constants.intakeLServo * power)
+            rIS.power = (Constants.intakeRServo * power)
         }
         var intakePower: Double = 0.0
 
