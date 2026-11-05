@@ -27,10 +27,10 @@ class Park : OpMode() {
     private val p: PoseFactory = PoseFactory.degrees()
 
     // Start position at x = 24.0, y = 24.0, heading = 0.0
-    private val startPose: Pose = p.of(24.0, 24.0, 90.0)
+    private val startPose: Pose = p.of(24.0, 24.0, 0.0)
 
     // Moved forward by 12 inches (1 foot) on the X-axis: x = 36.0, keeping y and heading the same
-    private val parkPose: Pose = p.of(48.0, 24.0, 90.0)
+    private val parkPose: Pose = p.of(48.0, 24.0, 0.0)
     private fun park(): Path {
         return line(startPose, parkPose).linear(startPose, parkPose)
     }

@@ -36,7 +36,4 @@ class ArcadeDrive  {
         telemetry.addData("LeftDrivePower: ", left.getPower())
         telemetry.addData("RightDrivePower: ", right.getPower())
     }
-
-
-
 }

@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.pedro.Constants
 
 
-@Autonomous(name = "AutoPath", group = "Autonomous")
+@Autonomous(name = "Circle", group = "Autonomous")
 class AutoPath : LinearOpMode() {
 
     private lateinit var follower: Follower

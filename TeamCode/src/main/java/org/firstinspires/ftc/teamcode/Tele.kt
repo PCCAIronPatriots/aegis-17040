@@ -8,12 +8,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 @TeleOp(name = "TeleOp", group = "OpMode")
 class Tele : OpMode() {
     var drive = MecanumDrive()
-    var launch = Launcher()
+    var launch = Launcher() //this includes the windmill
     var intake = Intake()
 
     override fun init() {
         drive.init(hardwareMap)
-       launch.init(hardwareMap)
+        launch.init(hardwareMap)
         intake.init(hardwareMap)
 
         drive.telem(telemetry)
@@ -23,12 +23,8 @@ class Tele : OpMode() {
 
     }
     override fun loop() {
-        drive.init(hardwareMap)
-        launch.init(hardwareMap)
-        intake.init(hardwareMap)
         drive.run(gamepad1)
         launch.control(gamepad1)
-        intake.run(gamepad1)
 
         drive.telem(telemetry)
         intake.telem(telemetry)
