@@ -26,6 +26,7 @@ class Launcher(private val windmill: Windmill = Windmill()) {
             DcMotor.RunMode.RUN_USING_ENCODER,
             PIDFCoefficients(40.0, 0.0, 0.0, 12.5)
         )
+        launcher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE)
     }
 
     fun setVInP(power: Double) { // set launcher velocity in percentage of power
@@ -45,16 +46,16 @@ class Launcher(private val windmill: Windmill = Windmill()) {
          setVInP(power)
      }
 
-    fun runAuto(timeInSeconds: Double) { //autonomous control of launcher
-        val startTime = TimeSource.Monotonic.markNow()
-        val runTime = timeInSeconds.seconds
-        windmill.autoRun(getCurV())
-        if (startTime.elapsedNow() <= runTime) {
-            setVInP(1.0)
-        } else {
-            setVInP(0.0)
-        }
-    }
+     fun shoot() {
+         setVInP(1.0)
+         windmill.autoRun(getCurV())
+     }
+
+     fun stop() {
+         setVInP(0.0)
+         windmill.run(0.0)
+     }
+
     fun telem(telemetry: Telemetry) {
             val launcherRPM: Double = (launcher.getVelocity() / 28 * 60)
             val launcherSetRPM: Double = (Constants.launcherSetSpeed / 28 * 60)

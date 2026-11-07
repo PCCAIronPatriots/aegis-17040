@@ -41,9 +41,7 @@ class Intake {
         }
             intakePower(intakePower)
         }
-
-
-        fun telem(telemetry: Telemetry) {
+    fun telem(telemetry: Telemetry) {
             telemetry.addData("IntakeRealPower:", intakeMotor.getPower())
         }
     }
