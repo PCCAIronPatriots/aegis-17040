@@ -14,6 +14,7 @@ import kotlin.time.Duration.Companion.seconds
 
 class Launcher(private val windmill: Windmill = Windmill()) {
     private lateinit var launcher: DcMotorEx
+    val tDZ = Constants.triggerDeadZone
 
     fun getCurV(): Double = launcher.getVelocity()
 
@@ -33,36 +34,46 @@ class Launcher(private val windmill: Windmill = Windmill()) {
         launcher.setVelocity(Constants.launcherTickPerRevolution * 100 * power * Constants.launcherSetSpeed)
     }
 
-     fun control(gamepad1: Gamepad) { //gamepad control
-         windmill.autoRun(getCurV())
-         var power = 0.0
-         if (gamepad1.right_trigger > 0.15 && gamepad1.left_trigger < 0.15) {
-             power = 1.0
-         } else if (gamepad1.left_trigger > 0.15 && gamepad1.right_trigger < 0.15) {
-             power = -1.0
-         } else {
-             power = 0.0
-         }
-         setVInP(power)
-     }
+    fun control(gamepad1: Gamepad) { //gamepad control
+        windmill.autoRun(getCurV())
+        var power = 0.0
+        if (gamepad1.right_trigger > tDZ && gamepad1.left_trigger < -tDZ) {
+            power = 1.0
+        } else if (gamepad1.left_trigger > tDZ && gamepad1.right_trigger < -tDZ) {
+            power = -1.0
+        } else {
+            power = 0.0
+        }
+        setVInP(power)
+    }
 
-     fun shoot() {
-         setVInP(1.0)
-         windmill.autoRun(getCurV())
-     }
+    fun shoot() {
+        setVInP(1.0)
+        windmill.autoRun(getCurV())
+    }
 
-     fun stop() {
-         setVInP(0.0)
-         windmill.run(0.0)
-     }
+    fun stop() {
+        setVInP(0.0)
+        windmill.run(0.0)
+    }
 
     fun telem(telemetry: Telemetry) {
-            val launcherRPM: Double = (launcher.getVelocity() / 28 * 60)
-            val launcherSetRPM: Double = (Constants.launcherSetSpeed / 28 * 60)
+        val launcherRPM: Double = (launcher.getVelocity() / 28 * 60)
+        val launcherSetRPM: Double = (Constants.launcherSetSpeed / 28 * 60)
 
-            telemetry.addData("LauncherPower: ", launcher.getPower())
-            telemetry.addData("LauncherRPM: ", launcherRPM)
-            telemetry.addData("LauncherSetRPM: ", launcherSetRPM)
-        }
+        telemetry.addData("LauncherPower: ", launcher.getPower())
+        telemetry.addData("LauncherRPM: ", launcherRPM)
+        telemetry.addData("LauncherSetRPM: ", launcherSetRPM)
     }
+    fun rTrigStat(gamepad1: Gamepad) : Boolean {
+        if (gamepad1.right_trigger > tDZ) {
+            return true
+        } else return false
+    }
+    fun lTrigStat(gamepad1: Gamepad) : Boolean {
+        if (gamepad1.left_trigger > tDZ) {
+            return true
+        } else return false
+    }
+}
 

@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.Gamepad
 
 
 object Constants {
+    const val joystickDeadZone = 0.05
+    const val triggerDeadZone = 0.05
     const val intakeMotor = 1.0
     const val intakeLServo = 1.0
     const val intakeRServo = 1.0

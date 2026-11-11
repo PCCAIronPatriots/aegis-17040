@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.ops
 
-import com.pedropathing.api.Paths.line
 import com.pedropathing.api.Paths.path
 import com.pedropathing.api.PoseFactory
 import com.pedropathing.follower.Follower
@@ -9,17 +8,12 @@ import com.pedropathing.ivy.Scheduler.schedule
 import com.pedropathing.ivy.pedro.PedroCommands.follow
 import com.pedropathing.math.Pose
 import com.pedropathing.paths.Path
-import com.pedropathing.paths.curves.Curve
+import com.pedropathing.paths.curves.bezier.BezierCurve
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import org.firstinspires.ftc.teamcode.pedro.Constants
-import com.pedropathing.ivy.Command
-import com.pedropathing.ivy.Scheduler.schedule
-import com.pedropathing.ivy.groups.Groups.sequential
-import com.pedropathing.ivy.pedro.PedroCommands.follow
-import com.pedropathing.paths.curves.bezier.BezierCurve
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Launcher
+import org.firstinspires.ftc.teamcode.pedro.Constants
 
 @Autonomous (name = "Score", group = "Auto")
 class Score : OpMode() {
@@ -42,13 +36,14 @@ class Score : OpMode() {
     private val controlPose : Pose = p.of(85.0, 20.0, 0.0)
 
     // Moved forward by 12 inches (1 foot) on the X-axis: x = 36.0, keeping y and heading the same
-    private val parkPose: Pose = p.of(39.1, -0.5, 0.0)
+    private val parkPose: Pose = p.of(39.1, -1.0, 0.0)
     private fun park(): Path {
         return path(BezierCurve(startPose, controlPose, parkPose)).linear(startPose, parkPose)
     }
 
     override fun init() {
         launch.init(hardwareMap)
+        follower.setPose(Pose(0.0, 0.0, 0.0))
         launch.telem(telemetry)
         Scheduler.reset()
         follower = Constants.create(hardwareMap)

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import com.qualcomm.robotcore.hardware.Gamepad
-
+import kotlin.math.abs
 
 class MecanumDrive {
     private lateinit var fl: DcMotor
@@ -39,20 +39,6 @@ class MecanumDrive {
         fr.setPower((-lStickY - lStickX - rStickX).toDouble() * Constants.chassisSpeed)
         rr.setPower((-lStickY + lStickX - rStickX).toDouble() * Constants.chassisSpeed)
 
-        /*if (mecanum == true) {
-            fl.setPower((-lStickY + lStickX + rStickX).toDouble()) // -1.0 - 1.0 power level (sent from Joysticks)
-            rl.setPower((-lStickY - lStickX + rStickX).toDouble())
-            fr.setPower((-lStickY - lStickX - rStickX).toDouble())
-            rr.setPower((-lStickY + lStickX - rStickX).toDouble())
-        } else run {
-            val yAxis = -gamepad1.left_stick_y
-            val xAxis = gamepad1.right_stick_x
-
-            fl.setPower((yAxis + xAxis).toDouble())
-            fr.setPower((yAxis - xAxis).toDouble())
-            rl.setPower((yAxis + xAxis).toDouble())
-            rr.setPower((yAxis - xAxis).toDouble())
-            */
 
         }
 
@@ -61,5 +47,15 @@ class MecanumDrive {
         telemetry.addData("FrontRightPower: ", fr.getPower())
         telemetry.addData("RearLeftPower: ", rl.getPower())
         telemetry.addData("RearRightPower: ", rr.getPower())
+    }
+    fun getJoyStat(gamepad1: Gamepad) : Boolean {
+        val drive = -gamepad1.left_stick_y.toDouble()
+        val strafe = -gamepad1.left_stick_x.toDouble()
+        val turn = -gamepad1.right_stick_x.toDouble()
+        val joyDZ = Constants.joystickDeadZone
+        val joystickActive = abs(drive) > joyDZ ||
+            abs(strafe) > joyDZ ||
+            abs(turn) > joyDZ
+        return joystickActive
     }
 }
