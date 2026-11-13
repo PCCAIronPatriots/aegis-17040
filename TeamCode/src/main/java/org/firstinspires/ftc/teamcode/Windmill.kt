@@ -22,7 +22,7 @@ class Windmill {
 
     }
 
-    fun control(gamepad1: Gamepad) {
+    fun manualControl(gamepad1: Gamepad) {
         windmill.power = 0.0
         if (gamepad1.a) {
             windmill.power = (Constants.windmillServo)

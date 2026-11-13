@@ -36,13 +36,12 @@ class Launcher(private val windmill: Windmill = Windmill()) {
 
     fun control(gamepad1: Gamepad) { //gamepad control
         windmill.autoRun(getCurV())
-        var power = 0.0
-        if (gamepad1.right_trigger > tDZ && gamepad1.left_trigger < -tDZ) {
-            power = 1.0
-        } else if (gamepad1.left_trigger > tDZ && gamepad1.right_trigger < -tDZ) {
-            power = -1.0
+        val power = if (gamepad1.right_trigger > tDZ && gamepad1.left_trigger < tDZ) {
+            1.0
+        } else if (gamepad1.left_trigger > tDZ && gamepad1.right_trigger < tDZ) {
+            -1.0
         } else {
-            power = 0.0
+            0.0
         }
         setVInP(power)
     }
