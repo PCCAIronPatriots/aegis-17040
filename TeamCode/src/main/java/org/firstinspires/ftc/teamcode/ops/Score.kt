@@ -42,12 +42,12 @@ class Score : OpMode() {
     }
 
     override fun init() {
-        launch.init(hardwareMap)
-        follower.setPose(Pose(0.0, 0.0, 0.0))
-        launch.telem(telemetry)
         Scheduler.reset()
         follower = Constants.create(hardwareMap)
         follower.setPose(startPose)
+
+        launch.init(hardwareMap)
+        launch.telem(telemetry)
     }
 
     override fun start() {
