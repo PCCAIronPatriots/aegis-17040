@@ -7,31 +7,31 @@ import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.PIDFCoefficients
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import org.firstinspires.ftc.teamcode.Constants.launcherSetVelocity
+import org.firstinspires.ftc.teamcode.Constants.LauncherSetVelocity
 import kotlin.time.TimeSource
 import kotlin.time.Duration.Companion.seconds
 
 
 class Launcher(private val windmill: Windmill = Windmill()) {
     private lateinit var launcher: DcMotorEx
-    val tDZ = Constants.triggerDeadZone
+    val tDZ = Constants.TriggerDeadZone
 
-    fun getCurV(): Double = launcher.getVelocity()
+    fun getCurV(): Double = launcher.velocity
 
 
-    fun init(hardwaremap: HardwareMap) {
-        windmill.init(hardwaremap)
-        launcher = hardwaremap.get(DcMotorEx::class.java, "launcher")
+    fun init(hardware: HardwareMap) {
+        windmill.init(hardware)
+        launcher = hardware.get(DcMotorEx::class.java, "launcher")
         launcher.direction = DcMotorSimple.Direction.FORWARD
         launcher.setPIDFCoefficients(
             DcMotor.RunMode.RUN_USING_ENCODER,
             PIDFCoefficients(40.0, 0.0, 0.0, 12.5)
         )
-        launcher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE)
+        launcher.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
     }
 
     fun setVInP(power: Double) { // set launcher velocity in percentage of power
-        launcher.setVelocity(Constants.launcherTickPerRevolution * 100 * power * Constants.launcherSetSpeed)
+        launcher.velocity = (Constants.LauncherTickPerRevolution * 100 * power * Constants.LauncherSetSpeed)
     }
 
     fun control(gamepad1: Gamepad) { //gamepad control
@@ -57,10 +57,10 @@ class Launcher(private val windmill: Windmill = Windmill()) {
     }
 
     fun telem(telemetry: Telemetry) {
-        val launcherRPM: Double = (launcher.getVelocity() / 28 * 60)
-        val launcherSetRPM: Double = (Constants.launcherSetSpeed / 28 * 60)
+        val launcherRPM: Double = (launcher.velocity / 28 * 60)
+        val launcherSetRPM: Double = (Constants.LauncherSetSpeed / 28 * 60)
 
-        telemetry.addData("LauncherPower: ", launcher.getPower())
+        telemetry.addData("LauncherPower: ", launcher.power)
         telemetry.addData("LauncherRPM: ", launcherRPM)
         telemetry.addData("LauncherSetRPM: ", launcherSetRPM)
     }

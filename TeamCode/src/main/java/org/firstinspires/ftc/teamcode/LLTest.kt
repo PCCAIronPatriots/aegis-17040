@@ -11,7 +11,7 @@ class LLTest : OpMode() {
 
     override fun init() {
             limelight = hardwareMap.get(Limelight3A::class.java, "limelight")
-            telemetry.setMsTransmissionInterval(11)
+        telemetry.msTransmissionInterval = 11
 
             limelight.pipelineSwitch(0)
 
@@ -22,10 +22,10 @@ class LLTest : OpMode() {
             val result = limelight.getLatestResult()
             if (result != null) {
                 if (result.isValid()) {
-                    val botpose = result.getBotpose()
-                    telemetry.addData("tx", result.getTx())
-                    telemetry.addData("ty", result.getTy())
-                    telemetry.addData("Botpose", botpose.toString())
+                    val botPose = result.botpose
+                    telemetry.addData("tx", result.tx)
+                    telemetry.addData("ty", result.ty)
+                    telemetry.addData("BotPose", botPose.toString())
                 }
             }
     }

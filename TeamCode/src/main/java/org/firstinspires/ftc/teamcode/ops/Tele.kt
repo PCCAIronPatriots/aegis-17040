@@ -8,7 +8,7 @@ import com.pedropathing.follower.Follower
 import com.pedropathing.follower.ManualDrive
 import com.pedropathing.math.Pose
 import org.firstinspires.ftc.teamcode.pedro.Constants
-import org.firstinspires.ftc.teamcode.Constants.chassisSpeed
+import org.firstinspires.ftc.teamcode.Constants.ChassisSpeed
 
 @TeleOp(name = "TeleOp", group = "OpMode")
 class Tele : OpMode() {
@@ -31,9 +31,9 @@ class Tele : OpMode() {
     override fun loop() { // code that loops after driver presses "play" on the driver hub
         ManualDrive.driveOrHold(
             follower,
-            -gamepad1.left_stick_y.toDouble() * chassisSpeed,
-            -gamepad1.left_stick_x.toDouble() * chassisSpeed,
-            -gamepad1.right_stick_x.toDouble() * chassisSpeed,
+            -gamepad1.left_stick_y.toDouble() * ChassisSpeed,
+            -gamepad1.left_stick_x.toDouble() * ChassisSpeed,
+            -gamepad1.right_stick_x.toDouble() * ChassisSpeed,
         )
         follower.update()
 

@@ -25,9 +25,9 @@ class Intake {
 
     fun run(gamepad1: Gamepad) {
         fun intakePower(power: Double) {
-            intakeMotor.power = (Constants.intakeMotor * power)
+            intakeMotor.power = (Constants.IntakeMotor * power)
             //lIS.power = (Constants.intakeLServo * power)
-            rIS.power = (Constants.intakeRServo * power)
+            rIS.power = (Constants.IntakeRServo * power)
         }
         var intakePower: Double = 0.0
 
@@ -42,7 +42,7 @@ class Intake {
             intakePower(intakePower)
         }
     fun telem(telemetry: Telemetry) {
-            telemetry.addData("IntakeRealPower:", intakeMotor.getPower())
+            telemetry.addData("IntakeRealPower:", intakeMotor.power)
         }
     }
 
