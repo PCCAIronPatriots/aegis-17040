@@ -7,7 +7,7 @@ import com.pedropathing.math.Pose
 import org.firstinspires.ftc.teamcode.pedro.Constants
 import java.io.File
 
-@TeleOp (name = "FieldTest", group = "OpMode")
+@TeleOp (name = "AutoMapper", group = "OpMode")
 class AutoMapper : OpMode() {
     private lateinit var follower: Follower
     private var driveOrHoldEnabled = true
@@ -57,8 +57,13 @@ class AutoMapper : OpMode() {
             follower.setPose(Pose(0.0, 0.0, 0.0))
         }
         follower.update()
-
+        telemetry.addLine("Add Pose: A")
+        telemetry.addLine("Enable Driving: X")
+        telemetry.addLine("Zero Robot on Field: B")
+        telemetry.addLine("Enable Pose Storing: Y")
+        telemetry.addLine()
         telemetry.addData("DriveOrHold: ", driveOrHoldEnabled)
+        telemetry.addData("WriteFile :", writeFile)
         telemetry.addData("Stored Count: ", storedPoses.size)
         for ((index, pose) in storedPoses.withIndex()) {
             telemetry.addData("Pose $index", "X: %.2f, Y: %.2f, H: %.1f°",
