@@ -12,16 +12,25 @@ import org.firstinspires.ftc.teamcode.Constants.LauncherSetVelocity
 class Windmill {
     private lateinit var windmill: CRServo
 
+    /**
+     * Sets raw power to the windmill servo.
+     */
     fun run(power: Double) {
         windmill.power = power
     }
 
+    /**
+     * Initializes the windmill CRServo hardware.
+     */
     fun init(hardware: HardwareMap) {
         windmill = hardware.get(CRServo::class.java, "windmill")
         windmill.direction = DcMotorSimple.Direction.FORWARD
 
     }
 
+    /**
+     * Provides manual control over the windmill servo using gamepad buttons A and B.
+     */
     fun manualControl(gamepad1: Gamepad) {
         windmill.power = 0.0
         if (gamepad1.a) {
@@ -33,6 +42,9 @@ class Windmill {
         }
     }
 
+    /**
+     * Automatically operates the windmill based on launcher velocity thresholds.
+     */
     fun autoRun(currentVelocity: Double) {
         val windmillThreshold = (LauncherSetVelocity * (Constants.WindmillThresholdValue / 100.0))
         if (currentVelocity > windmillThreshold) {
@@ -44,6 +56,9 @@ class Windmill {
         }
     }
 
+    /**
+     * Reports windmill servo power via telemetry.
+     */
     fun telem(telemetry: Telemetry) {
         telemetry.addData("WindmillServoPower: ", windmill.power)
     }

@@ -9,6 +9,9 @@ class LLTest : OpMode() {
     private lateinit var limelight: Limelight3A
 
 
+    /**
+     * Initializes the Limelight camera and sets up transmission interval and pipelines.
+     */
     override fun init() {
             limelight = hardwareMap.get(Limelight3A::class.java, "limelight")
         telemetry.msTransmissionInterval = 11
@@ -18,6 +21,10 @@ class LLTest : OpMode() {
 
             limelight.start()
         }
+
+    /**
+     * Periodically queries the Limelight results and logs targeting data to telemetry.
+     */
     override fun loop() {
             val result = limelight.getLatestResult()
             if (result != null) {

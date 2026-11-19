@@ -16,6 +16,9 @@ class Tele : OpMode() {
     var launch = Launcher() // this includes the windmill
     var intake = Intake()
 
+    /**
+     * Initializes follower, launcher, intake, and updates initial telemetry.
+     */
     override fun init() { /*
     code that loops after driver presses "init" on driver hub and before driver presses "start"
     */
@@ -28,6 +31,9 @@ class Tele : OpMode() {
         telemetry.update()
     }
 
+    /**
+     * Main teleop loop handling manual driving, intake, launcher controls, and telemetry.
+     */
     override fun loop() { // code that loops after driver presses "play" on the driver hub
         ManualDrive.driveOrHold(
             follower,

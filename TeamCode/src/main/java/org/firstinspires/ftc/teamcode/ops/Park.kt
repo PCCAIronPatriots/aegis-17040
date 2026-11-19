@@ -31,20 +31,33 @@ class Park : OpMode() {
 
     // Moved forward by 12 inches (1 foot) on the X-axis: x = 36.0, keeping y and heading the same
     private val parkPose: Pose = p.of(24.0, 36.0, 0.0)
+
+    /**
+     * Defines the linear parking path from startPose to parkPose.
+     */
     private fun park(): Path {
         return line(startPose, parkPose).linear(startPose, parkPose)
     }
 
+    /**
+     * Resets the scheduler, creates the follower, and sets the starting pose.
+     */
     override fun init() {
         Scheduler.reset()
         follower = Constants.create(hardwareMap)
         follower.setPose(startPose)
     }
 
+    /**
+     * Schedules the path following action when autonomous starts.
+     */
     override fun start() {
         schedule(follow(follower, park()))
     }
 
+    /**
+     * Updates follower and scheduler execution, and logs position telemetry.
+     */
     override fun loop() {
         follower.update()
         Scheduler.execute()

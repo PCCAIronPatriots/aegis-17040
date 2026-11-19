@@ -37,10 +37,17 @@ class Score : OpMode() {
 
     // Moved forward by 12 inches (1 foot) on the X-axis: x = 36.0, keeping y and heading the same
     private val parkPose: Pose = p.of(39.1, -1.0, 0.0)
+
+    /**
+     * Defines the scoring/parking bezier curve path.
+     */
     private fun park(): Path {
         return path(BezierCurve(startPose, controlPose, parkPose)).linear(startPose, parkPose)
     }
 
+    /**
+     * Resets scheduler, initializes follower pose, and initializes launcher telemetry.
+     */
     override fun init() {
         Scheduler.reset()
         follower = Constants.create(hardwareMap)
@@ -50,11 +57,17 @@ class Score : OpMode() {
         launch.telem(telemetry)
     }
 
+    /**
+     * Resets timer and sets initial state to LAUNCHING when autonomous starts.
+     */
     override fun start() {
         timer.reset()
         state = State.LAUNCHING
     }
 
+    /**
+     * State machine loop handling launching phase and driving phase.
+     */
     override fun loop() {
         when (state) {
             State.LAUNCHING -> {

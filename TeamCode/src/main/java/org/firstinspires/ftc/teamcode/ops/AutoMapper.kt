@@ -17,11 +17,17 @@ class AutoMapper : OpMode() {
     private var lastY = false
     private var writeFile = false
 
+    /**
+     * Initializes the follower instance and sets initial pose to (0, 0, 0).
+     */
     override fun init() {
         follower = Constants.create(hardwareMap)
         follower.setPose(Pose(0.0, 0.0, 0.0))
     }
 
+    /**
+     * Main control loop handling toggle buttons, pose storage, driving, and telemetry output.
+     */
     override fun loop() {
         val currentX = gamepad1.x // robot control toggle switch
         if (currentX && !lastX) {
@@ -53,8 +59,10 @@ class AutoMapper : OpMode() {
             )
         }
 
-        if (gamepad1.b) { // zero robot out
-            follower.setPose(Pose(0.0, 0.0, 0.0))
+        if (!driveOrHoldEnabled) {
+            if (gamepad1.b) { // zero robot out
+                follower.setPose(Pose(0.0, 0.0, 0.0))
+            }
         }
         follower.update()
         telemetry.addLine("Add Pose: A")
@@ -74,6 +82,10 @@ class AutoMapper : OpMode() {
         telemetry.addData("ActiveHeading: ", Math.toDegrees(follower.pose().heading()))
         telemetry.update()
     }
+
+    /**
+     * Writes recorded poses to a text file upon stopping if file writing is enabled.
+     */
     override fun stop() { // write file if enabled after driver clicks stop
         val file = File("storedPoses.txt")
         if (writeFile) {

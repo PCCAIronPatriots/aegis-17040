@@ -13,6 +13,9 @@ class Intake {
     private lateinit var lIS: CRServo //lIS stands for left intake servo
     private lateinit var rIS: CRServo //rIS is the same
 
+    /**
+     * Initializes the intake hardware components and sets their motor/servo directions.
+     */
     fun init(hardwareMap: HardwareMap) {
         intakeMotor = hardwareMap.get(DcMotor::class.java, "intakeMotor")
         //lIS = hardwareMap.get(CRServo::class.java, "lIS")
@@ -23,6 +26,9 @@ class Intake {
         rIS.direction = DcMotorSimple.Direction.FORWARD
     }
 
+    /**
+     * Controls intake motor and servo power based on gamepad bumper inputs.
+     */
     fun run(gamepad1: Gamepad) {
         fun intakePower(power: Double) {
             intakeMotor.power = (Constants.IntakeMotor * power)
@@ -41,6 +47,10 @@ class Intake {
         }
             intakePower(intakePower)
         }
+
+    /**
+     * Outputs current intake telemetry data.
+     */
     fun telem(telemetry: Telemetry) {
             telemetry.addData("IntakeRealPower:", intakeMotor.power)
         }
