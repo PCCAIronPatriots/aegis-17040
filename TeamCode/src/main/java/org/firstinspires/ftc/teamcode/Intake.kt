@@ -33,7 +33,7 @@ class Intake {
         fun intakePower(power: Double) {
             intakeMotor.power = (Constants.IntakeMotor * power)
             //lIS.power = (Constants.intakeLServo * power)
-            rIS.power = (Constants.IntakeRServo * power)
+            rIS.power = (1.0 * power)
         }
         var intakePower: Double = 0.0
 

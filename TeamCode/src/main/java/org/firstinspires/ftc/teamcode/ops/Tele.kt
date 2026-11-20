@@ -28,6 +28,10 @@ class Tele : OpMode() {
         intake.init(hardwareMap)
         launch.telem(telemetry)
         intake.telem(telemetry)
+        telemetry.addData("X", follower.pose().x())
+        telemetry.addData("Y", follower.pose().y())
+        telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()))
+        telemetry.addData("Follower Mode", follower.mode())
         telemetry.update()
     }
 
@@ -47,6 +51,10 @@ class Tele : OpMode() {
         launch.control(gamepad1)
         intake.telem(telemetry)
         launch.telem(telemetry)
+        telemetry.addData("X", follower.pose().x())
+        telemetry.addData("Y", follower.pose().y())
+        telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()))
+        telemetry.addData("Follower Mode", follower.mode())
         telemetry.update()
     }
 }

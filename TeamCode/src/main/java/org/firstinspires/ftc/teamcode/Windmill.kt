@@ -34,9 +34,9 @@ class Windmill {
     fun manualControl(gamepad1: Gamepad) {
         windmill.power = 0.0
         if (gamepad1.a) {
-            windmill.power = (Constants.WindmillServo)
+            windmill.power = (1.0)
         } else if (gamepad1.b) {
-            windmill.power = (-Constants.WindmillServo)
+            windmill.power = (-1.0)
         } else {
             windmill.power = 0.0
         }
