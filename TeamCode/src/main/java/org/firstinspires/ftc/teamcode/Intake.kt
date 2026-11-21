@@ -10,7 +10,8 @@ import com.qualcomm.robotcore.hardware.CRServo
 
 class Intake {
     private lateinit var intakeMotor: DcMotor
-    private lateinit var lIS: CRServo //lIS stands for left intake servo
+
+    //private lateinit var lIS: CRServo //lIS stands for left intake servo
     private lateinit var rIS: CRServo //rIS is the same
 
     /**
@@ -31,28 +32,39 @@ class Intake {
      */
     fun run(gamepad1: Gamepad) {
         fun intakePower(power: Double) {
-            intakeMotor.power = (Constants.IntakeMotor * power)
+            intakeMotor.power = (power)
             //lIS.power = (Constants.intakeLServo * power)
-            rIS.power = (1.0 * power)
+            rIS.power = (power)
         }
-        var intakePower: Double = 0.0
+
+        var intakePower = 0.0
 
 
-        if (gamepad1.left_bumper && !gamepad1.right_bumper) {
-            intakePower = -1.0
+        intakePower = if (gamepad1.left_bumper && !gamepad1.right_bumper) {
+            -1.0
         } else if (gamepad1.right_bumper && !gamepad1.left_bumper) {
-            intakePower = 1.0
+            1.0
         } else {
-            intakePower = 0.0
+            0.0
         }
-            intakePower(intakePower)
-        }
+        intakePower(intakePower)
+    }
 
     /**
      * Outputs current intake telemetry data.
      */
     fun telem(telemetry: Telemetry) {
-            telemetry.addData("IntakeRealPower:", intakeMotor.power)
-        }
+        telemetry.addData("IntakeMotorPower:", intakeMotor.power)
     }
+
+    fun start(hardwareMap: HardwareMap, telemetry: Telemetry) {
+        init(hardwareMap)
+        telem(telemetry)
+    }
+
+    fun loop(gamepad1: Gamepad, telemetry: Telemetry) {
+        run(gamepad1)
+        telem(telemetry)
+    }
+}
 

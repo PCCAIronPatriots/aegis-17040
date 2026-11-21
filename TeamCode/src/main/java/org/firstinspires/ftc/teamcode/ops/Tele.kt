@@ -4,57 +4,31 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.Intake
 import org.firstinspires.ftc.teamcode.Launcher
-import com.pedropathing.follower.Follower
-import com.pedropathing.follower.ManualDrive
-import com.pedropathing.math.Pose
-import org.firstinspires.ftc.teamcode.pedro.Constants
-import org.firstinspires.ftc.teamcode.Constants.ChassisSpeed
+import org.firstinspires.ftc.teamcode.Drive
 
 @TeleOp(name = "TeleOp", group = "OpMode")
-class Tele : OpMode() {
-    private lateinit var follower: Follower
+ class Tele : OpMode() {
     var launch = Launcher() // this includes the windmill
     var intake = Intake()
-
+    var drive = Drive()
     /**
-     * Initializes follower, launcher, intake, and updates initial telemetry.
+      Initializes follower, launcher, intake, and updates initial telemetry.
      */
-    override fun init() { /*
+    override fun init() { /**
     code that loops after driver presses "init" on driver hub and before driver presses "start"
     */
-        follower = Constants.create(hardwareMap)
-        follower.setPose(Pose(0.0, 0.0, 0.0))
-        launch.init(hardwareMap)
-        intake.init(hardwareMap)
-        launch.telem(telemetry)
-        intake.telem(telemetry)
-        telemetry.addData("X", follower.pose().x())
-        telemetry.addData("Y", follower.pose().y())
-        telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()))
-        telemetry.addData("Follower Mode", follower.mode())
+        drive.start(hardwareMap, telemetry)
+        intake.start(hardwareMap, telemetry)
+        launch.start(hardwareMap, telemetry)
         telemetry.update()
     }
-
     /**
      * Main teleop loop handling manual driving, intake, launcher controls, and telemetry.
      */
     override fun loop() { // code that loops after driver presses "play" on the driver hub
-        ManualDrive.driveOrHold(
-            follower,
-            -gamepad1.left_stick_y.toDouble() * ChassisSpeed,
-            -gamepad1.left_stick_x.toDouble() * ChassisSpeed,
-            -gamepad1.right_stick_x.toDouble() * ChassisSpeed,
-        )
-        follower.update()
-
-        intake.run(gamepad1)
-        launch.control(gamepad1)
-        intake.telem(telemetry)
-        launch.telem(telemetry)
-        telemetry.addData("X", follower.pose().x())
-        telemetry.addData("Y", follower.pose().y())
-        telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()))
-        telemetry.addData("Follower Mode", follower.mode())
+        drive.loop(gamepad1, telemetry)
+        intake.loop(gamepad1, telemetry)
+        launch.loop(gamepad1, telemetry)
         telemetry.update()
     }
 }

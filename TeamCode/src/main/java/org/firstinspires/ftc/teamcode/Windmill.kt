@@ -7,7 +7,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.CRServo
 import com.qualcomm.robotcore.hardware.DcMotorEx
-import org.firstinspires.ftc.teamcode.Constants.LauncherSetVelocity
+import org.firstinspires.ftc.teamcode.Constants.LAUNCHER_SET_VELOCITY
 
 class Windmill {
     private lateinit var windmill: CRServo
@@ -46,7 +46,7 @@ class Windmill {
      * Automatically operates the windmill based on launcher velocity thresholds.
      */
     fun autoRun(currentVelocity: Double) {
-        val windmillThreshold = (LauncherSetVelocity * (Constants.WindmillThresholdValue / 100.0))
+        val windmillThreshold = (LAUNCHER_SET_VELOCITY * (Constants.WindmillThresholdValue / 100.0))
         if (currentVelocity > windmillThreshold) {
             run(1.0)
         } else if (currentVelocity <= -windmillThreshold) {
@@ -55,12 +55,5 @@ class Windmill {
             run(0.0)
         }
     }
-
-    /**
-     * Reports windmill servo power via telemetry.
-     */
-    fun telem(telemetry: Telemetry) {
-        telemetry.addData("WindmillServoPower: ", windmill.power)
-    }
-
 }
+

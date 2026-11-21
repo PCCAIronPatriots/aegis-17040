@@ -33,10 +33,10 @@ class Score : OpMode() {
 
     // Start position at x = 24.0, y = 24.0, heading = 0.0
     private val startPose: Pose = p.of(124.15, 49.25, 0.0)
-    private val controlPose : Pose = p.of(85.0, 20.0, 0.0)
+    private val controlPose : Pose = p.of(95.0, 10.0, 0.0)
 
     // Moved forward by 12 inches (1 foot) on the X-axis: x = 36.0, keeping y and heading the same
-    private val parkPose: Pose = p.of(39.1, -1.0, 0.0)
+    private val parkPose: Pose = p.of(39.1, 2.5, 0.0)
 
     /**
      * Defines the scoring/parking bezier curve path.
@@ -72,7 +72,7 @@ class Score : OpMode() {
         when (state) {
             State.LAUNCHING -> {
                 launch.shoot()
-                if (timer.seconds() >= 6.0) {
+                if (timer.seconds() >= 15.0) {
                     launch.stop()
                     schedule(follow(follower, park()))
                     state = State.DRIVING

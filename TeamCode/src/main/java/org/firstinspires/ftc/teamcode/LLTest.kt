@@ -14,11 +14,8 @@ class LLTest : OpMode() {
      */
     override fun init() {
             limelight = hardwareMap.get(Limelight3A::class.java, "limelight")
-        telemetry.msTransmissionInterval = 11
-
+             telemetry.msTransmissionInterval = 11
             limelight.pipelineSwitch(0)
-
-
             limelight.start()
         }
 

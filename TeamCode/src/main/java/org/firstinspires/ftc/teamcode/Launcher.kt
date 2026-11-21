@@ -7,10 +7,6 @@ import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.PIDFCoefficients
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import org.firstinspires.ftc.teamcode.Constants.LauncherSetVelocity
-import kotlin.time.TimeSource
-import kotlin.time.Duration.Companion.seconds
-
 
 class Launcher(private val windmill: Windmill = Windmill()) {
     private lateinit var launcher: DcMotorEx
@@ -40,7 +36,7 @@ class Launcher(private val windmill: Windmill = Windmill()) {
      * Sets the launcher velocity as a percentage of maximum power.
      */
     fun setVInP(power: Double) { // set launcher velocity in percentage of power
-        launcher.velocity = (Constants.LauncherTickPerRevolution * 100 * power * Constants.LauncherSetSpeed)
+        launcher.velocity = (Constants.LAUNCHER_TICK_PER_REVOLUTION * 100 * power * Constants.LauncherSetSpeed)
     }
 
     /**
@@ -79,7 +75,7 @@ class Launcher(private val windmill: Windmill = Windmill()) {
      */
     fun telem(telemetry: Telemetry) {
         val launcherRPM: Double = (launcher.velocity / 28 * 60)
-        val launcherSetRPM: Double = (Constants.LauncherSetSpeed / 28 * 60)
+        val launcherSetRPM: Double = (Constants.LauncherSetSpeed * 6000)
 
         telemetry.addData("LauncherPower: ", launcher.power)
         telemetry.addData("LauncherRPM: ", launcherRPM)
@@ -87,21 +83,29 @@ class Launcher(private val windmill: Windmill = Windmill()) {
     }
 
     /**
-     * Returns true if the right trigger exceeds the deadzone threshold.
+     * Returns true if the right trigger exceeds the dead zone threshold.
      */
     fun rTrigStat(gamepad1: Gamepad) : Boolean {
-        if (gamepad1.right_trigger > tDZ) {
-            return true
-        } else return false
+        return if (gamepad1.right_trigger > tDZ) {
+            true
+        } else false
     }
 
     /**
-     * Returns true if the left trigger exceeds the deadzone threshold.
+     * Returns true if the left trigger exceeds the dead zone threshold.
      */
     fun lTrigStat(gamepad1: Gamepad) : Boolean {
-        if (gamepad1.left_trigger > tDZ) {
-            return true
-        } else return false
+        return if (gamepad1.left_trigger > tDZ) {
+            true
+        } else false
+    }
+    fun start(hardwareMap: HardwareMap, telemetry: Telemetry) {
+        init(hardwareMap)
+        telem(telemetry)
+    }
+    fun loop(gamepad1: Gamepad, telemetry: Telemetry) {
+        control(gamepad1)
+        telem(telemetry)
     }
 }
 
