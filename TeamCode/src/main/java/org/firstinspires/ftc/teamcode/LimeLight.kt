@@ -2,17 +2,17 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+//import com.qualcomm.robotcore.eventloop.opmode.OpMode
+//import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.qualcomm.robotcore.hardware.Gamepad
+//import com.qualcomm.robotcore.hardware.Gamepad
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import com.pedropathing.follower.Follower
-import com.pedropathing.math.Pose
-import com.qualcomm.hardware.limelightvision.LLResultTypes
+//import com.pedropathing.math.Pose
+//import com.qualcomm.hardware.limelightvision.LLResultTypes
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import org.firstinspires.ftc.teamcode.pedro.Constants
-import java.util.Collections.list
+//import java.util.Collections.list
 
 
 class LimeLight {

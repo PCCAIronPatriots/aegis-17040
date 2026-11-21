@@ -1,12 +1,9 @@
 package org.firstinspires.ftc.teamcode
 
-import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
-import org.firstinspires.ftc.robotcore.external.Telemetry
-import com.qualcomm.robotcore.hardware.Gamepad
+//import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.CRServo
-import com.qualcomm.robotcore.hardware.DcMotorEx
 import org.firstinspires.ftc.teamcode.Constants.LAUNCHER_SET_VELOCITY
 
 class Windmill {
@@ -27,11 +24,10 @@ class Windmill {
         windmill.direction = DcMotorSimple.Direction.FORWARD
 
     }
-
     /**
      * Provides manual control over the windmill servo using gamepad buttons A and B.
      */
-    fun manualControl(gamepad1: Gamepad) {
+    /*fun manualControl(gamepad1: Gamepad) {
         windmill.power = 0.0
         if (gamepad1.a) {
             windmill.power = (1.0)
@@ -41,6 +37,7 @@ class Windmill {
             windmill.power = 0.0
         }
     }
+    */
 
     /**
      * Automatically operates the windmill based on launcher velocity thresholds.

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Unset conflicting Android prefs environment variable if set
+unset ANDROID_PREFS_ROOT
+
 #
 # Copyright © 2015 the original authors.
 #

@@ -25,10 +25,10 @@ android {
     }
     namespace = 'com.qualcomm.ftcrobotcontroller'
     lint {
-        targetSdk 28
+        targetSdk = 28
     }
     testOptions {
-        targetSdk 28
+        targetSdk = 28
     }
 }
 
