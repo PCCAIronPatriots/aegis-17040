@@ -1,19 +1,12 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.mechanisms
 
+import com.pedropathing.follower.Follower
 import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
-//import com.qualcomm.robotcore.eventloop.opmode.OpMode
-//import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.HardwareMap
-//import com.qualcomm.robotcore.hardware.Gamepad
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import com.pedropathing.follower.Follower
-//import com.pedropathing.math.Pose
-//import com.qualcomm.hardware.limelightvision.LLResultTypes
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import org.firstinspires.ftc.teamcode.pedro.Constants
-//import java.util.Collections.list
-
 
 class LimeLight {
     lateinit var lime : Limelight3A

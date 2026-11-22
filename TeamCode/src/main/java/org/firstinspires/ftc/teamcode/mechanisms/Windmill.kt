@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.mechanisms
 
+import com.qualcomm.robotcore.hardware.CRServo
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
-//import com.qualcomm.robotcore.hardware.Gamepad
-import com.qualcomm.robotcore.hardware.CRServo
-import org.firstinspires.ftc.teamcode.Constants.LAUNCHER_SET_VELOCITY
+import org.firstinspires.ftc.teamcode.Constants
 
 class Windmill {
     private lateinit var windmill: CRServo
@@ -43,7 +42,7 @@ class Windmill {
      * Automatically operates the windmill based on launcher velocity thresholds.
      */
     fun autoRun(currentVelocity: Double) {
-        val windmillThreshold = (LAUNCHER_SET_VELOCITY * (Constants.WindmillThresholdValue / 100.0))
+        val windmillThreshold = (Constants.LAUNCHER_SET_VELOCITY * (Constants.WindmillThresholdValue / 100.0))
         if (currentVelocity > windmillThreshold) {
             run(1.0)
         } else if (currentVelocity <= -windmillThreshold) {
@@ -53,4 +52,3 @@ class Windmill {
         }
     }
 }
-

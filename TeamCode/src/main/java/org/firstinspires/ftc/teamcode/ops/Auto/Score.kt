@@ -1,21 +1,20 @@
-package org.firstinspires.ftc.teamcode.ops
+package org.firstinspires.ftc.teamcode.ops.Auto
 
-import com.pedropathing.api.Paths.path
+import com.pedropathing.api.Paths
 import com.pedropathing.api.PoseFactory
 import com.pedropathing.follower.Follower
 import com.pedropathing.ivy.Scheduler
-import com.pedropathing.ivy.Scheduler.schedule
-import com.pedropathing.ivy.pedro.PedroCommands.follow
+import com.pedropathing.ivy.pedro.PedroCommands
 import com.pedropathing.math.Pose
 import com.pedropathing.paths.Path
 import com.pedropathing.paths.curves.bezier.BezierCurve
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.util.ElapsedTime
-import org.firstinspires.ftc.teamcode.Launcher
+import org.firstinspires.ftc.teamcode.mechanisms.Launcher
 import org.firstinspires.ftc.teamcode.pedro.Constants
 
-@Autonomous (name = "Score", group = "Auto")
+@Autonomous(name = "Score", group = "Auto")
 class Score : OpMode() {
     enum class State {
         LAUNCHING,
@@ -42,7 +41,7 @@ class Score : OpMode() {
      * Defines the scoring/parking bezier curve path.
      */
     private fun park(): Path {
-        return path(BezierCurve(startPose, controlPose, parkPose)).linear(startPose, parkPose)
+        return Paths.path(BezierCurve(startPose, controlPose, parkPose)).linear(startPose, parkPose)
     }
 
     /**
@@ -74,7 +73,7 @@ class Score : OpMode() {
                 launch.shoot()
                 if (timer.seconds() >= 15.0) {
                     launch.stop()
-                    schedule(follow(follower, park()))
+                    Scheduler.schedule(PedroCommands.follow(follower, park()))
                     state = State.DRIVING
                 }
             }

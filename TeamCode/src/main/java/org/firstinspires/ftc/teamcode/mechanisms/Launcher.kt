@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.mechanisms
 
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.PIDFCoefficients
 import org.firstinspires.ftc.robotcore.external.Telemetry
+import org.firstinspires.ftc.teamcode.Constants
 
 class Launcher(private val windmill: Windmill = Windmill()) {
     private lateinit var launcher: DcMotorEx
@@ -108,4 +109,3 @@ class Launcher(private val windmill: Windmill = Windmill()) {
         telem(telemetry)
     }
 }
-

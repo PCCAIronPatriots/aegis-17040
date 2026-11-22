@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode
-import com.qualcomm.hardware.limelightvision.Limelight3A
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
+package org.firstinspires.ftc.teamcode.ops.Tele
 
+import com.qualcomm.hardware.limelightvision.Limelight3A
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
 @TeleOp(name = "LLTest", group = "OpMode")
 class LLTest : OpMode() {
@@ -34,5 +34,3 @@ class LLTest : OpMode() {
             }
     }
 }
-
-

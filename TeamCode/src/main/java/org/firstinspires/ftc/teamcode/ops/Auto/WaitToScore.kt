@@ -1,21 +1,20 @@
-package org.firstinspires.ftc.teamcode.ops
+package org.firstinspires.ftc.teamcode.ops.Auto
 
-import com.pedropathing.api.Paths.path
+import com.pedropathing.api.Paths
 import com.pedropathing.api.PoseFactory
 import com.pedropathing.follower.Follower
 import com.pedropathing.ivy.Scheduler
-import com.pedropathing.ivy.Scheduler.schedule
-import com.pedropathing.ivy.pedro.PedroCommands.follow
+import com.pedropathing.ivy.pedro.PedroCommands
 import com.pedropathing.math.Pose
 import com.pedropathing.paths.Path
 import com.pedropathing.paths.curves.bezier.BezierCurve
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.util.ElapsedTime
-import org.firstinspires.ftc.teamcode.Launcher
+import org.firstinspires.ftc.teamcode.mechanisms.Launcher
 import org.firstinspires.ftc.teamcode.pedro.Constants
 
-@Autonomous (name = "WaitToScore", group = "Auto")
+@Autonomous(name = "WaitToScore", group = "Auto")
 class WaitToScore : OpMode() {
     enum class State {
         LAUNCHING,
@@ -43,7 +42,7 @@ class WaitToScore : OpMode() {
      * Defines the scoring/parking bezier curve path.
      */
     private fun park(): Path {
-        return path(BezierCurve(startPose, controlPose, parkPose)).linear(startPose, parkPose)
+        return Paths.path(BezierCurve(startPose, controlPose, parkPose)).linear(startPose, parkPose)
     }
 
     /**
@@ -81,7 +80,7 @@ class WaitToScore : OpMode() {
                 if (timer.seconds() >= 20.0) {
                     launch.stop()
                     state = State.DRIVING
-                    schedule(follow(follower, park()))
+                    Scheduler.schedule(PedroCommands.follow(follower, park()))
 
                 }
             }

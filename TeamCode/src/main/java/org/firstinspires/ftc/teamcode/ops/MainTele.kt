@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.ops
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import org.firstinspires.ftc.teamcode.Intake
-import org.firstinspires.ftc.teamcode.Launcher
-import org.firstinspires.ftc.teamcode.Drive
+import org.firstinspires.ftc.teamcode.mechanisms.Drive
+import org.firstinspires.ftc.teamcode.mechanisms.Intake
+import org.firstinspires.ftc.teamcode.mechanisms.Launcher
+import org.firstinspires.ftc.teamcode.Team
 
-@TeleOp(name = "TeleOp", group = "OpMode")
- class Tele : OpMode() {
-    var launch = Launcher() // this includes the windmill
-    var intake = Intake()
-    var drive = Drive()
+abstract class MainTele(val team : Team?) : OpMode() {
+     var launch = Launcher() // this includes the windmill
+     var intake = Intake()
+     var drive = Drive()
     /**
       Initializes follower, launcher, intake, and updates initial telemetry.
      */

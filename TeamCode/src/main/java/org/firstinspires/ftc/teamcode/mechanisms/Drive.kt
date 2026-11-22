@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.mechanisms
 
 import com.pedropathing.follower.Follower
 import com.pedropathing.follower.ManualDrive
 import com.pedropathing.math.Pose
+import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import com.qualcomm.robotcore.hardware.Gamepad
-import org.firstinspires.ftc.teamcode.Constants.ChassisSpeed
 import org.firstinspires.ftc.teamcode.pedro.Constants
 
 class Drive {
@@ -21,9 +20,9 @@ class Drive {
     fun run(gamepad1: Gamepad) {
         ManualDrive.driveOrHold(
             follower,
-            -gamepad1.left_stick_y.toDouble() * ChassisSpeed,
-            -gamepad1.left_stick_x.toDouble() * ChassisSpeed,
-            -gamepad1.right_stick_x.toDouble() * ChassisSpeed,
+            -gamepad1.left_stick_y.toDouble() * org.firstinspires.ftc.teamcode.Constants.ChassisSpeed,
+            -gamepad1.left_stick_x.toDouble() * org.firstinspires.ftc.teamcode.Constants.ChassisSpeed,
+            -gamepad1.right_stick_x.toDouble() * org.firstinspires.ftc.teamcode.Constants.ChassisSpeed,
         )
         follower.update()
     }
@@ -33,7 +32,6 @@ class Drive {
         telemetry.addData("Y", follower.pose().y())
         telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()))
         telemetry.addData("Follower Mode", follower.mode())
-        // telemetry.addData("ChassisSpeed: ${ChassisSpeed * 100}%")
     }
 
     fun start(hardwareMap: HardwareMap, telemetry: Telemetry) {

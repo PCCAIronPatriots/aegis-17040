@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.mechanisms
 
+import com.qualcomm.robotcore.hardware.CRServo
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
+import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import com.qualcomm.robotcore.hardware.Gamepad
-import com.qualcomm.robotcore.hardware.CRServo
-
 
 class Intake {
     private lateinit var intakeMotor: DcMotor
@@ -37,10 +36,9 @@ class Intake {
             rIS.power = (power)
         }
 
-        var intakePower = 0.0
 
 
-        intakePower = if (gamepad1.left_bumper && !gamepad1.right_bumper) {
+        val intakePower = if (gamepad1.left_bumper && !gamepad1.right_bumper) {
             -1.0
         } else if (gamepad1.right_bumper && !gamepad1.left_bumper) {
             1.0
@@ -67,4 +65,3 @@ class Intake {
         telem(telemetry)
     }
 }
-

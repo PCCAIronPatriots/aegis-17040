@@ -1,13 +1,14 @@
-package org.firstinspires.ftc.teamcode.ops
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+package org.firstinspires.ftc.teamcode.ops.Tele
+
 import com.pedropathing.follower.Follower
 import com.pedropathing.follower.ManualDrive
 import com.pedropathing.math.Pose
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.pedro.Constants
 import java.io.File
 
-@TeleOp (name = "AutoMapper", group = "OpMode")
+@TeleOp(name = "AutoMapper")
 class AutoMapper : OpMode() {
     private lateinit var follower: Follower
     private var driveOrHoldEnabled = true
@@ -59,10 +60,8 @@ class AutoMapper : OpMode() {
             )
         }
 
-        if (!driveOrHoldEnabled) {
-            if (gamepad1.b) { // zero robot out
+        if (!driveOrHoldEnabled && gamepad1.b) {
                 follower.setPose(Pose(0.0, 0.0, 0.0))
-            }
         }
         follower.update()
         telemetry.addLine("Add Pose: A")
