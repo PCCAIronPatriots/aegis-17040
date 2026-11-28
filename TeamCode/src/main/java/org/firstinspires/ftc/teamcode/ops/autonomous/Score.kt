@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ops.Auto
+package org.firstinspires.ftc.teamcode.ops.autonomous
 
 import com.pedropathing.api.Paths
 import com.pedropathing.api.PoseFactory
@@ -11,7 +11,7 @@ import com.pedropathing.paths.curves.bezier.BezierCurve
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.util.ElapsedTime
-import org.firstinspires.ftc.teamcode.mechanisms.Launcher
+import org.firstinspires.ftc.teamcode.subsystems.Launcher
 import org.firstinspires.ftc.teamcode.pedro.Constants
 
 @Autonomous(name = "Score", group = "Auto")

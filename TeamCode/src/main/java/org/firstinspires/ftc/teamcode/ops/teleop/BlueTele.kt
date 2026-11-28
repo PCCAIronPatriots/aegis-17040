@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.ops.Tele
+package org.firstinspires.ftc.teamcode.ops.teleop
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.Team
 import org.firstinspires.ftc.teamcode.ops.MainTele
 
-@TeleOp(name = "NoTeam")
-class NoTeam : MainTele(null)
+@TeleOp(name = "BlueTele")
+class BlueTele : MainTele(Team.BLUE)

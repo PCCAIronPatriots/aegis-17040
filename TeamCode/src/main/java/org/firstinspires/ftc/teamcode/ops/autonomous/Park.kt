@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ops.Auto
+package org.firstinspires.ftc.teamcode.ops.autonomous
 
 import com.pedropathing.api.Paths
 import com.pedropathing.api.PoseFactory

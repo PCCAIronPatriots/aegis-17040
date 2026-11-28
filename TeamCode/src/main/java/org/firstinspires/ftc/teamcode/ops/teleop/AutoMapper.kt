@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ops.Tele
+package org.firstinspires.ftc.teamcode.ops.teleop
 
 import com.pedropathing.follower.Follower
 import com.pedropathing.follower.ManualDrive

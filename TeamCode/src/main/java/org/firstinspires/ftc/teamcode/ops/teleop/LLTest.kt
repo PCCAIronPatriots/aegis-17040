@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ops.Tele
+package org.firstinspires.ftc.teamcode.ops.teleop
 
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
@@ -24,13 +24,11 @@ class LLTest : OpMode() {
      */
     override fun loop() {
             val result = limelight.getLatestResult()
-            if (result != null) {
-                if (result.isValid()) {
+            if (result != null && result.isValid()) {
                     val botPose = result.botpose
                     telemetry.addData("tx", result.tx)
                     telemetry.addData("ty", result.ty)
                     telemetry.addData("BotPose", botPose.toString())
-                }
             }
     }
 }

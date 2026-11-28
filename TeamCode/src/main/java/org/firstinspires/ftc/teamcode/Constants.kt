@@ -12,4 +12,5 @@ object Constants {
     val LAUNCHER_SET_VELOCITY = LauncherSetSpeed * 2800
     @JvmField var WindmillThresholdValue = 4 // - value in % ex. 5(%)
     const val LAUNCHER_TICK_PER_REVOLUTION = 28.0 //motor tick/revololution (5203 6000rpm gobilda motor)
+    @JvmField var MAX_TURRET_ROTATION_SPEED = 0.8
 }
