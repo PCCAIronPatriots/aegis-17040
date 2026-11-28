@@ -111,7 +111,7 @@ This project builds upon several open-source libraries, development tools, and h
 
 | Hardware | Description | Link |
 |---|---|---|
-| goBILDA Pinpoint | Odometry computer used for robot localization. | [Product Page](https://www.gobilda.com/pinpoint-odometry-computer/) |
+| goBILDA Pinpoint | Odometry computer used for robot localization. | [Product Page](https://www.gobilda.com/odometry/) |
 | Limelight 3A | Vision processing hardware used for target detection and tracking. | [Documentation](https://docs.limelightvision.io/) |
 | goBILDA | Robotics hardware, components, and documentation. | [Website](https://www.gobilda.com/) |
 
